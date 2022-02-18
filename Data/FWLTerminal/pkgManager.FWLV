@@ -1,0 +1,24 @@
+import sys
+import requests
+import os
+from os import path
+
+ARGS = sys.argv
+SYSTEM = os.system
+
+MAIN_LIST = {
+    "coolstuff": "https://pastebin/raw/",
+}
+
+def DOWNLOAD_PKG(PATH, PKGNAME):
+    if MAIN_LIST[PKGNAME]:
+        print("[PKG: LIST]: Found package '" + PKGNAME + "'")
+        print("   ")
+        print("[PKG: LIST]: Downloading....")
+        rq = requests.get(MAIN_LIST[PKGNAME])
+        DATA = str(rq.content)
+        with open(PATH + PKGNAME + ".py", 'w') as f:
+            f.write(DATA)
+            
+
+DOWNLOAD_PKG("PKGS", ARGS[2])
